@@ -9,6 +9,7 @@ public class Homework {
         final String resultFileName = getResultFileName(args);
         new FileProcessor()
                 .process(processingFileName, resultFileName);
+        //new FileProcessor().process("text.txt", "tst");
     }
 
     @Nonnull
