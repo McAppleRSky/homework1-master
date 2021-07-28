@@ -1,0 +1,51 @@
+plugins {
+    id "java"
+    id "idea"
+}
+
+ext {
+    fingBugsVersion = "3.0.2"
+    commonsLangVersion = "3.11"
+    logbackVersion = "1.2.3"
+    junitVersion = "5.7.0"
+    mockitoVersion = "3.5.11"
+}
+
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly "com.google.code.findbugs:jsr305:$fingBugsVersion"
+    implementation "org.apache.commons:commons-lang3:$commonsLangVersion"
+    implementation "ch.qos.logback:logback-classic:$logbackVersion"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junitVersion"
+    testImplementation "org.mockito:mockito-junit-jupiter:$mockitoVersion"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    archiveFileName = "${project.name}.jar"
+    manifest {
+        attributes "Main-Class": "ru.digitalhabbits.homework2.Homework"
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

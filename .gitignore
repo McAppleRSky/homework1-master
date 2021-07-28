@@ -1,0 +1,8 @@
+*.iml
+.DS_Store
+.idea
+.gradle
+out/
+build/
+/results/
+/plugins/
